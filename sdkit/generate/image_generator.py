@@ -76,9 +76,7 @@ def generate_images(
         context.init_image_latent, context.init_image_mask_tensor = None, None
 
 def txt2img(params: dict, context: Context, num_inference_steps, **kwargs):
-    params.update({
-        'steps': num_inference_steps,
-    })
+    params['steps'] = num_inference_steps
 
     samples = make_samples(**params)
     return latent_samples_to_images(context, samples)
@@ -90,12 +88,12 @@ def img2img(params: dict, context: Context, num_inference_steps, num_outputs, wi
     if not hasattr(context, 'init_image_latent') or context.init_image_latent is None:
         context.init_image_latent, context.init_image_mask_tensor = get_image_latent_and_mask(context, init_image, init_image_mask, width, height, num_outputs)
 
-    params.update({
+    params |= {
         'steps': num_inference_steps,
         'init_image_latent': context.init_image_latent,
         'mask': context.init_image_mask_tensor,
         'prompt_strength': prompt_strength,
-    })
+    }
 
     samples = make_samples(**params)
     images = latent_samples_to_images(context, samples)

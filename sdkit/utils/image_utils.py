@@ -23,20 +23,17 @@ def buffer_to_base64_str(buffered, output_format="PNG"):
     buffered.seek(0)
     img_byte = buffered.getvalue()
     mime_type = "image/png" if output_format.lower() == "png" else "image/jpeg"
-    img_str = f"data:{mime_type};base64," + base64.b64encode(img_byte).decode()
-    return img_str
+    return f"data:{mime_type};base64,{base64.b64encode(img_byte).decode()}"
 
 def base64_str_to_buffer(img_str):
     mime_type = "image/png" if img_str.startswith("data:image/png;") else "image/jpeg"
     img_str = img_str[len(f"data:{mime_type};base64,"):]
     data = base64.b64decode(img_str)
-    buffered = BytesIO(data)
-    return buffered
+    return BytesIO(data)
 
 def base64_str_to_img(img_str):
     buffered = base64_str_to_buffer(img_str)
-    img = Image.open(buffered)
-    return img
+    return Image.open(buffered)
 
 def resize_img(img: Image, desired_width, desired_height, clamp_to_64=False):
     w, h = img.size

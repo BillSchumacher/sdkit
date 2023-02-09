@@ -36,4 +36,4 @@ def rebuild_index():
     index = {}
     for _, m in db.items():
         module_index = {info.get('quick_hash'): info for _, info in m.items()}
-        index.update(module_index)
+        index |= module_index

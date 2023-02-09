@@ -40,7 +40,9 @@ def load_model(context: Context, scan_model=True, check_for_config_with_same_nam
 
     # load the config
     if config_file_path is None:
-        raise Exception(f'Unknown model! No config file path specified in context.model_configs for the "stable-diffusion" model!')
+        raise Exception(
+            'Unknown model! No config file path specified in context.model_configs for the "stable-diffusion" model!'
+        )
 
     log.info(f'using config: {config_file_path}')
     config = OmegaConf.load(config_file_path)

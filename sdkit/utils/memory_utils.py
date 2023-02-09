@@ -123,7 +123,7 @@ def take_memory_snapshot(device, print_snapshot=True):
 
     # take the snapshot
     entries, total_mem = _get_tensor_entries(device)
-    curr_tensor_ids = set(entry[0] for entry in entries)
+    curr_tensor_ids = {entry[0] for entry in entries}
     new_tensor_ids = curr_tensor_ids - tensor_ids_snapshot
     tensor_ids_snapshot = curr_tensor_ids
 

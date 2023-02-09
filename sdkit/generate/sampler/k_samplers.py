@@ -42,7 +42,7 @@ def sample(context: Context, sampler_name:str=None, noise: Tensor=None, batch_si
         }
     }
 
-    if sampler_name in ('dpm_fast', 'dpm_adaptive'):
+    if sampler_name in {'dpm_fast', 'dpm_adaptive'}:
         params['sigma_min'] = sigmas[-2] # sigmas is sorted. the last element is 0, which isn't allowed
         params['sigma_max'] = sigmas[0]
 

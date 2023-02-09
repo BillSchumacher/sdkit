@@ -19,6 +19,4 @@ def apply(context: Context, image, **kwargs):
 
         _, _, output = context.models['gfpgan'].enhance(image, has_aligned=False, only_center_face=False, paste_back=True)
         output = output[:,:,::-1]
-        output = Image.fromarray(output)
-
-        return output
+        return Image.fromarray(output)

@@ -43,11 +43,8 @@ def split_weighted_subprompts(text):
             remaining -= idx
             # remove from main text
             text = text[idx+1:]
-            # find value for weight 
-            if " " in text:
-                idx = text.index(" ") # first occurence
-            else: # no space, read to end
-                idx = len(text)
+            # find value for weight
+            idx = text.index(" ") if " " in text else len(text)
             if idx != 0:
                 try:
                     weight = float(text[:idx])

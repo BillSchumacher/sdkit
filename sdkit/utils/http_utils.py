@@ -14,7 +14,7 @@ def download_file(url: str, out_path: str):
     '''
     from sdkit.utils import log
 
-    start_offset = 0 if not os.path.exists(out_path) else os.path.getsize(out_path)
+    start_offset = os.path.getsize(out_path) if os.path.exists(out_path) else 0
     res = requests.get(url, stream=True)
     if not res.ok: return
     total_bytes = int(res.headers.get('Content-Length', '0'))

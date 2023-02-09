@@ -2,6 +2,7 @@
 Runs the desired Stable Diffusion models against the desired samplers. Saves the output images
 to disk, along with the peak RAM and VRAM usage, as well as the sampling performance.
 '''
+
 import os
 import time
 import argparse
@@ -38,7 +39,11 @@ log.info('Starting..')
 from sdkit.models import load_model
 from sdkit.generate.sampler import default_samplers, k_samplers
 
-sd_models = set([f for f in os.listdir(args.models_dir) if os.path.splitext(f)[1] in ('.ckpt', '.safetensors')])
+sd_models = {
+    f
+    for f in os.listdir(args.models_dir)
+    if os.path.splitext(f)[1] in ('.ckpt', '.safetensors')
+}
 all_samplers = set(default_samplers.samplers.keys()) | set(k_samplers.samplers.keys())
 args.vram_usage_levels = args.vram_usage_levels.split(',')
 

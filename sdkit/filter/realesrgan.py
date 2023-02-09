@@ -9,6 +9,4 @@ def apply(context: Context, image, scale=4, **kwargs):
 
     output, _ = context.models['realesrgan'].enhance(image, outscale=scale)
     output = output[:,:,::-1]
-    output = Image.fromarray(output)
-
-    return output
+    return Image.fromarray(output)

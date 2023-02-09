@@ -17,9 +17,9 @@ def load_model(context: Context, **kwargs):
 
     try:
         vae = load_tensor_file(vae_model_path)
-        vae_dict = {k: v for k, v in vae["state_dict"].items() if k[0:4] != "loss"}
+        vae_dict = {k: v for k, v in vae["state_dict"].items() if k[:4] != "loss"}
         if context.half_precision:
-            for key in vae_dict.keys():
+            for key in vae_dict:
                 vae_dict[key] = vae_dict[key].half()
 
         _set_vae(context, vae_dict)
